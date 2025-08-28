@@ -32,15 +32,21 @@ public class UnityChanController : MonoBehaviour
   {
     //走るアニメーションを再生するためにanimatorのパラメータを調整する
     this.animator.SetFloat("Horizontal", 1);
+
     //着地しているかを調べる
     bool isGround = (transform.position.y > this.groundLevel) ? false : true;
     this.animator.SetBool("isGround", isGround);
+
+    //ジャンプ状態のときにはボリュームを0にする
+    GetComponent<AudioSource>().volume = (isGround) ? 1 : 0;
+
     //着地状態でクリックされた場合
     if (Mouse.current.leftButton.isPressed && isGround)
     {
       //上方向の力をかける
       this.rigid2D.linearVelocity = new Vector2(0, this.jumpVelocity);
     }
+
     //クリックをやめたら上方向への速度を減速する
     if (!Mouse.current.leftButton.isPressed == false)
     {
@@ -49,6 +55,7 @@ public class UnityChanController : MonoBehaviour
         this.rigid2D.linearVelocity *= this.dump;
       }
     }
+    
     //デッドラインを超えた場合ゲームオーバーにする
     if (transform.position.x < this.deadLine)
     {
