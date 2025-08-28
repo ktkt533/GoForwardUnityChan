@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem_Actions;
+using UnityEngine.InputSystem;
 
 public class UnityChanController : MonoBehaviour
 {
@@ -34,7 +34,7 @@ public class UnityChanController : MonoBehaviour
     bool isGround = (transform.position.y > this.groundLevel) ? false : true;
     this.animator.SetBool("isGround", isGround);
     //着地状態でクリックされた場合
-    if (isGround && Mouse.current.leftButton.isPressed)
+    if (Mouse.current.leftButton.isPressed && isGround )
     {
       //上方向の力をかける
       this.rigid2D.linearVelocity = new Vector2(0, this.jumpVelocity);
