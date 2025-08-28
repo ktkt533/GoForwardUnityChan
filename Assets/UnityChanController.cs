@@ -50,7 +50,7 @@ public class UnityChanController : MonoBehaviour
       }
     }
     //デッドラインを超えた場合ゲームオーバーにする
-    if (transform.position.y < this.deadLine)
+    if (transform.position.x < this.deadLine)
     {
       //UIControllerのGameOver関数を呼び出して画面上に"Game Over"と表示する
       GameObject.Find("Canvas").GetComponent<UIController>().GameOver();
